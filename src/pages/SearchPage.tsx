@@ -210,7 +210,7 @@ export default function SearchPage() {
                   update({ departDate: e.target.value });
                   setErrors((er) => ({ ...er, departDate: "" }));
                 }}
-                className="px-3 py-2.75 border-[1.5px] border-[#E0DED7] rounded-lg text-[14px] text-[#0D0D0D] bg-[#FAFAF8] outline-none focus:border-[#0D0D0D] transition-colors"
+                className="px-3 py-2.75 border-[1.5px] border-[#E0DED7] rounded-lg text-[14px] text-[#0D0D0D] bg-[#FAFAF8] outline-none focus:border-[#0D0D0D] transition-colors w-full lg:w-auto"
               />
               {errors.departDate && (
                 <p className="text-[11px] text-[#C84B11]">
@@ -239,7 +239,7 @@ export default function SearchPage() {
                     update({ returnDate: e.target.value });
                     setErrors((er) => ({ ...er, returnDate: "" }));
                   }}
-                  className="px-3 py-2.75 border-[1.5px] border-[#E0DED7] rounded-lg text-[14px] text-[#0D0D0D] bg-[#FAFAF8] outline-none focus:border-[#0D0D0D] transition-colors"
+                  className="px-3 py-2.75 border-[1.5px] border-[#E0DED7] rounded-lg text-[14px] text-[#0D0D0D] bg-[#FAFAF8] outline-none focus:border-[#0D0D0D] transition-colors  w-full lg:w-auto"
                 />
                 {errors.returnDate && (
                   <p className="text-[11px] text-[#C84B11]">
