@@ -1,24 +1,8 @@
 import { Wind, Wifi, Clock, Users, ChevronRight } from "lucide-react";
-export type BusProps = {
-  id: string;
-  image: string;
-  name: string;
-  shortName: string;
-  capacity: number;
-  price: number;
-  departure: string;
-  arrival: string;
-  duration: string;
-  seatsTaken: Number[];
-  ac: boolean;
-  wifi: boolean;
-  terminal: string;
-  tag: string;
-  tagColor: "green" | "amber" | "blue" | "red";
-  amenities: String[];
-};
+import type { Bus } from "../types/Seats";
+
 type props = {
-  bus: BusProps;
+  bus: Bus;
   selected: boolean;
   onSelect: () => void;
 };

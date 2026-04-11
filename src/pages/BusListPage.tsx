@@ -1,10 +1,13 @@
-import BusCard, { type BusProps } from "../components/BusCard";
+import BusCard from "../components/BusCard";
 import ProgressBar from "../components/ProgressBar";
 import { useBookingStore } from "../store/bookingStore";
 import { formatDateShort } from "../utils/helpers";
 import { useNavigate } from "react-router";
 import { Icon } from "@iconify/react";
-import BUSES from "../data/buses.json";
+import busData from "../data/buses.json";
+import type { Bus } from "../types/Seats";
+
+const BUSES = busData as Bus[];
 
 export default function BusListPage() {
   const { booking, update, reset } = useBookingStore();
@@ -20,7 +23,7 @@ export default function BusListPage() {
     return matchesRoute && matchesTripType;
   });
 
-  const handleSelect = (bus: BusProps) => {
+  const handleSelect = (bus: Bus) => {
     update({ selectedBus: bus, selectedSeats: [] });
     navigate(`/bus/${bus.id}/seats/`);
   };
@@ -86,7 +89,7 @@ export default function BusListPage() {
           filteredBuses.map((bus) => (
             <BusCard
               key={bus.id}
-              bus={bus}
+              bus={bus as Bus}
               selected={booking.selectedBus?.id === bus.id}
               onSelect={() => handleSelect(bus)}
             />
