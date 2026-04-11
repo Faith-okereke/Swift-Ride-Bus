@@ -196,7 +196,7 @@ export default function SearchPage() {
 
           {/* Date Row */}
           <div
-            className={`grid gap-3 mb-3 ${booking.tripType !== "one-way" ? "lg:grid-cols-2 md:grid-cols-1" : "grid-cols-1 md:grid-cols-2"} `}
+            className={`grid gap-3 mb-3 ${booking.tripType !== "one-way" ? "lg:grid-cols-2 md:grid-cols-1 grid-cols-1" : "grid-cols-1 md:grid-cols-2"} `}
           >
             <div className="flex flex-col gap-1.25">
               <label className="text-[11px] font-semibold text-[#7A7A7A] uppercase tracking-[0.6px]">

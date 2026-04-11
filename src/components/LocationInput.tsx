@@ -75,7 +75,7 @@ export default function LocationInput({
           className="absolute left-3 top-1/2 -translate-y-1/2 text-[#7A7A7A] pointer-events-none shrink-0"
         />
         <span
-          className={`flex-1 truncate ${value ? "text-[#0D0D0D]" : "text-[#B8B8B8]"}`}
+          className={`flex-1 truncate ${value ? "text-[#0D0D0D] pl-6" : "text-[#B8B8B8] pl-0"}`}
         >
           {value || placeholder}
         </span>
