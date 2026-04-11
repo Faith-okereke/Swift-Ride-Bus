@@ -9,3 +9,10 @@
     @apply bg-transparent text-[#C84B11] border-[1.5px] border-[#C84B11] px-4 py-2 rounded-md hover:bg-[#C84B11] hover:text-white transition-colors duration-300 cursor-pointer ;
   }
 }
+
+.manrope-font {
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}

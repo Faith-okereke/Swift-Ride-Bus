@@ -50,7 +50,7 @@ export default function BusListPage() {
             icon={"material-symbols:arrow-back-ios-rounded"}
             fontSize={20}
           />
-          <span className="text-lg font-semibold">Back to Search</span>
+          <span className="md:text-lg text-base font-semibold">Back to Search</span>
         </button>
 
         {/* Header */}
@@ -74,7 +74,7 @@ export default function BusListPage() {
         {filteredBuses.length === 0 ? (
           <div className="text-center py-16 flex flex-col items-center justify-center gap-2">
             <Icon icon={"tabler:bus-off"} fontSize={80} />
-            <h3 className="text-2xl font-semibold">No buses found</h3>
+            <h3 className="text-2xl lg:text-4xl font-bold">No buses found</h3>
             <p className="text-[14px] text-[#7A7A7A]">
               Try a different route or date.
             </p>

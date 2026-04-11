@@ -18,7 +18,6 @@ export default function NotFoundPage() {
         {/* Text */}
         <h1
           className="text-[28px] font-bold text-[#0D0D0D] mb-3 tracking-tight"
-          style={{ fontFamily: "'Playfair Display', serif" }}
         >
           You've missed your stop
         </h1>

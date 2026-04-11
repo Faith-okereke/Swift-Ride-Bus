@@ -1,5 +1,8 @@
 import { Wind, Wifi, Clock, Users, ChevronRight } from "lucide-react";
 import type { Bus } from "../types/Seats";
+import { useNavigate } from "react-router";
+import { Icon } from "@iconify/react";
+import { useBookingStore } from "../store/bookingStore";
 
 type props = {
   bus: Bus;
@@ -14,11 +17,17 @@ const TAG_STYLES = {
 };
 
 export default function BusCard({ bus, selected, onSelect }: props) {
+  const { booking } = useBookingStore();
   const availableSeats = bus.capacity - bus.seatsTaken.length;
+  const navigate = useNavigate();
 
   return (
     <div
-      onClick={onSelect}
+      onClick={() => {
+        booking?.tripType === "hire"
+          ? navigate("/personal-details")
+          : onSelect();
+      }}
       className={`bg-white rounded-[14px] p-5 mb-3 cursor-pointer transition-all duration-200 
        shadow-lg hover:scale-95
         ${
@@ -72,10 +81,7 @@ export default function BusCard({ bus, selected, onSelect }: props) {
 
         {/* Time — hidden on mobile */}
         <div className="text-center hidden md:block shrink-0">
-          <div
-            className="text-[18px] font-semibold text-[#0D0D0D]"
-            style={{ fontFamily: "'Playfair Display', serif" }}
-          >
+          <div className="text-[18px] font-semibold text-[#0D0D0D]">
             {bus.departure}
           </div>
           <div className="text-[11px] text-[#7A7A7A]">Departs</div>
@@ -86,13 +92,20 @@ export default function BusCard({ bus, selected, onSelect }: props) {
 
         {/* Price */}
         <div className="text-right shrink-0">
-          <div
-            className="text-[22px] font-bold text-[#C84B11]"
-            style={{ fontFamily: "'Playfair Display', serif" }}
-          >
-            ₦{bus.price.toLocaleString()}
+          <div className="text-[22px] font-bold text-[#C84B11]">
+            <div className="text-[22px] font-bold text-[#C84B11]">
+              ₦
+              {booking?.tripType === "hire"
+                ? bus.hirePrice.toLocaleString()
+                : booking?.tripType === "round"
+                  ? (bus.price * 2).toLocaleString() 
+                  : bus.price.toLocaleString()}
+            </div>
           </div>
-          <div className="text-[11px] text-[#7A7A7A]">per seat</div>
+          <div className="text-[11px] text-[#7A7A7A]">
+            {" "}
+            {booking?.tripType === "hire" ? "per bus" : "per seat"}
+          </div>
         </div>
 
         <ChevronRight
@@ -103,15 +116,20 @@ export default function BusCard({ bus, selected, onSelect }: props) {
       <div className="flex justify-between items-center w-full pt-4 mt-4 border-t border-gray-300">
         {/* Terminal info */}
         <div className="flex items-center gap-2 text-[12px] text-[#7A7A7A]">
-          <span>📍</span>
+          <Icon icon="mi:location" />
           <span>{bus.terminal}</span>
           <span className="ml-auto text-[#0D0D0D] font-medium md:hidden">
             {bus.departure}
           </span>
         </div>
-        <button onClick={onSelect} className="btn-primary w-auto hidden lg:block">
-          View Seats
-        </button>
+        {booking?.tripType !== "hire" && (
+          <button
+            onClick={onSelect}
+            className="btn-primary w-auto hidden lg:block"
+          >
+            View Seats
+          </button>
+        )}
       </div>
     </div>
   );

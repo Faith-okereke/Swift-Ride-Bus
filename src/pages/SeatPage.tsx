@@ -96,7 +96,7 @@ export default function SeatPage() {
               icon={"material-symbols:arrow-back-ios-rounded"}
               fontSize={20}
             />
-            <span className="text-lg font-semibold">Back</span>
+            <span className="md:text-lg text-base font-semibold">Back</span>
           </button>
 
           <h3 className="absolute left-1/2 -translate-x-1/2 lg:text-2xl text-lg font-bold">
@@ -108,8 +108,8 @@ export default function SeatPage() {
           {/* Seat Map */}
 
           <div className="bg-white rounded-[14px] shadow-md p-6">
-            <div className="flex lg:flex-row flex-col  justify-between items-start ">
-              <div className="flex flex-col gap-3 items-centerlg:p-12 p-6 ">
+            <div className="flex lg:flex-row flex-col  justify-center gap-16 items-start ">
+              <div className="flex flex-col gap-3 items-center lg:p-12 p-6 ">
                 {/* First row — driver seat + 2 passenger seats only */}
                 <div className="grid grid-cols-5 gap-2">
                   {/* Driver seat (col 1) */}
@@ -179,8 +179,8 @@ export default function SeatPage() {
                   );
                 })}
               </div>
-              <div className="flex flex-col items-center justify-center gap-2">
-                <div className="flex lg:flex-col flex-row gap-2 pt-10">
+              <div className="flex flex-col  gap-2">
+                <div className="flex lg:flex-col flex-row gap-2 pt-10 lg:pt-6">
                   {legend.map((item, i) => (
                     <p
                       key={i}
@@ -193,17 +193,36 @@ export default function SeatPage() {
                     </p>
                   ))}
                 </div>
-                <p className="font-bold">
-                  Seat {booking?.selectedSeats.join(",")} selected
-                </p>
-
-                <button
-                  className="btn-secondary w-full disabled:cursor-not-allowed disabled:hover:bg-[#c84b11] mt-4 "
-                  disabled={booking?.selectedSeats.length < booking.passengers}
-                >
-                  <Link to={"/personal-details"}>Continue</Link>
-                </button>
+                <div className="text-justify pt-4">
+                  <p className="font-bold text-lg">
+                    Total Price: ₦
+                    {booking?.tripType === "hire"
+                      ? bus.hirePrice.toLocaleString()
+                      : booking?.tripType === "round"
+                        ? (
+                            bus.price *
+                            booking?.selectedSeats.length *
+                            2
+                          ).toLocaleString()
+                        : (
+                            bus.price * booking?.selectedSeats.length
+                          ).toLocaleString()}
+                  </p>
+                  {booking?.selectedSeats.length > 0 && (
+                    <p className="font-bold">
+                      Seat {booking?.selectedSeats.join(",") || 0} selected
+                    </p>
+                  )}
+                </div>
               </div>
+            </div>
+            <div className="flex justify-end items-end align-bottom">
+              <button
+                className="btn-primary w-auto disabled:cursor-not-allowed disabled:hover:bg-[#c84b11] mt-4 "
+                disabled={booking?.selectedSeats.length < booking.passengers}
+              >
+                <Link to={"/personal-details"}>Continue</Link>
+              </button>
             </div>
           </div>
         </div>

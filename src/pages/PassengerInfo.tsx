@@ -115,7 +115,7 @@ const PassengerInfo = () => {
         className=" flex items-center gap-2 cursor-pointer hover:text-[#c84b11] p-5"
       >
         <Icon icon={"material-symbols:arrow-back-ios-rounded"} fontSize={20} />
-        <span className="text-lg font-semibold">Back</span>
+        <span className="md:text-lg text-base font-semibold">Back</span>
       </button>
       <div className="grid place-items-center p-6">
         <form

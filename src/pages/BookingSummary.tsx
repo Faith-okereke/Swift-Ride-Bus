@@ -13,7 +13,12 @@ function BookingSummary() {
   const seatCount = booking.selectedSeats.length;
   const public_key = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
   const bus = booking.selectedBus as Bus | null;
-  const total = bus?.price && bus?.price * seatCount;
+  const total =
+    booking?.tripType === "round"
+      ? ((bus?.price ?? 0) * seatCount * 2).toLocaleString()
+      : ((bus?.price ?? 0) * seatCount).toLocaleString();
+  const intDuration = Number(booking?.hireDuration?.slice(-5, 2));
+  const hirePriceTotal = bus?.hirePrice && bus?.hirePrice * intDuration;
 
   const initializePayment = () => {
     try {
@@ -22,7 +27,12 @@ function BookingSummary() {
       const handler = PaystackPop.setup({
         key: public_key,
         email: booking?.passenger?.email,
-        amount: bus?.price && bus?.price * booking.passengers * 100,
+        amount:
+          booking?.tripType === "hire"
+            ? (bus?.hirePrice ?? 0) * 100
+            : booking?.tripType === "round"
+              ? (bus?.price ?? 0) * 2 * seatCount * 100
+              : (bus?.price ?? 0) * seatCount * 100,
         ref: booking?.bookingRef,
         callback: function (response: any) {
           navigate("/booking-confirmation");
@@ -36,8 +46,8 @@ function BookingSummary() {
 
       handler.openIframe();
     } catch (error) {
-      console.error("Payment Error:", error);
       toast.error("Failed to initiate payment. Check connection.");
+      console.error("Payment Error:", error);
     }
   };
   return (
@@ -51,7 +61,7 @@ function BookingSummary() {
             icon={"material-symbols:arrow-back-ios-rounded"}
             fontSize={20}
           />
-          <span className="text-lg font-semibold">Back</span>
+          <span className="md:text-lg text-base font-semibold">Back</span>
         </button>
 
         <h3 className="absolute left-1/2 -translate-x-1/2 lg:text-2xl text-lg font-bold">
@@ -71,6 +81,20 @@ function BookingSummary() {
           <p className="text-[#7A7A7A]">Bus Name</p>
           <p className="font-medium text-right">{bus?.name}</p>
         </div>
+
+        <div className="flex justify-between items-center w-full px-5 md:px-12">
+          <p className="text-[#7A7A7A]">Bus Capacity</p>
+          <p className="font-medium">{bus?.capacity} seater</p>
+        </div>
+
+        {booking?.tripType !== "hire" && (
+          <div className="flex justify-between items-center w-full px-5 md:px-12">
+            <p className="text-[#7A7A7A]">Seats Booked</p>
+            <p className="font-medium">
+              {booking.selectedSeats.sort((a, b) => a - b).join(", ")}
+            </p>
+          </div>
+        )}
         <p className="font-bold border-b border-b-gray-400 pb-2 px-5 md:px-12">
           Booking Details
         </p>
@@ -115,37 +139,47 @@ function BookingSummary() {
             </div>
           </div>
         )}
-        <div className="flex justify-between items-center w-full px-5 md:px-12">
-          <p className="text-[#7A7A7A]">Seats Booked</p>
-          <p className="font-medium">
-            {booking.selectedSeats.sort((a, b) => a - b).join(", ")}
+
+        <div className="flex flex-col gap-3">
+          <p className="font-bold border-b border-b-gray-400 pb-2 px-5 md:px-12">
+            {booking?.tripType !== "hire"
+              ? "Passenger's Details"
+              : "Hirer's Details"}
           </p>
-        </div>
-        {booking?.tripType !== "hire" && (
-          <div className="flex flex-col gap-3">
-            <p className="font-bold border-b border-b-gray-400 pb-2 px-5 md:px-12">
-              Passenger Details
-            </p>
+          {!bus?.hire && (
             <div className="flex justify-between items-center w-full px-5 md:px-12">
               <p className="text-[#7A7A7A]">Passengers</p>
               <p className="font-medium">
                 {`${booking.passengers} passenger${booking.passengers > 1 ? "s" : ""}`}
               </p>
             </div>
-            <div className="flex justify-between items-center w-full px-5 md:px-12">
-              <p className="text-[#7A7A7A]">Passenger Name</p>
-              <p className="font-medium">
-                {booking?.passenger?.firstName} {booking?.passenger?.lastName}
-              </p>
-            </div>
+          )}
+          <div className="flex justify-between items-center w-full px-5 md:px-12">
+            <p className="text-[#7A7A7A]">
+              {booking?.tripType === "hire" ? "Hirer's Name" : "Passenger Name"}
+            </p>
+            <p className="font-medium">
+              {booking?.passenger?.firstName} {booking?.passenger?.lastName}
+            </p>
           </div>
-        )}
+          <div className="flex justify-between items-center w-full px-5 md:px-12">
+            <p className="text-[#7A7A7A]">Email Address</p>
+            <p className="font-medium">{booking?.passenger?.email}</p>
+          </div>
+          <div className="flex justify-between items-center w-full px-5 md:px-12">
+            <p className="text-[#7A7A7A]">Phone Number</p>
+            <p className="font-medium">{booking?.passenger?.phone}</p>
+          </div>
+        </div>
       </div>
 
       <div className="flex justify-between pt-4 border-t border-t-gray-400 lg:px-12 px-5 my-4">
         <span className="font-semibold">Total</span>
         <span className="text-[24px] font-bold text-[#C84B11]">
-          ₦ {total?.toLocaleString()}
+          ₦{" "}
+          {booking?.tripType === "hire"
+            ? hirePriceTotal?.toLocaleString()
+            : total?.toLocaleString()}
         </span>
       </div>
       <div className="px-5 md:px-12 pb-10">

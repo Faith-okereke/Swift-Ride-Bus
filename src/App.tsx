@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes, useLocation } from "react-router";
 import PassengerInfo from "./pages/PassengerInfo";
 import NotFoundPage from "./components/NotFound";
 import BookingSummary from "./pages/BookingSummary";
+import { Toaster } from "react-hot-toast";
 
 function AppContent() {
   const { pathname } = useLocation();
@@ -17,7 +18,8 @@ function AppContent() {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen bg-[#FAFAF8]">
+    <div className="min-h-screen bg-[#FAFAF8] manrope-font">
+      <Toaster position="top-right" reverseOrder={false} />
       <Navbar />
       <main>
         <Routes>

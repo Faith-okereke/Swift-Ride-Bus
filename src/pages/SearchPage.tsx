@@ -112,7 +112,6 @@ export default function SearchPage() {
           </div>
           <h1
             className="text-5xl md:text-6xl font-bold leading-[1.1] mb-4 tracking-tight"
-            style={{ fontFamily: "'Playfair Display', serif" }}
           >
             Travel <em className="text-[#C84B11] not-italic">anywhere</em>
             <br />
@@ -138,7 +137,6 @@ export default function SearchPage() {
                 key={t.id}
                 onClick={() => {
                   update({ tripType: t.id });
-                  console.log(t.id);
                 }}
                 className={`flex-1 py-2.5 px-3 rounded-lg border-[1.5px] text-[13px] font-medium transition-all cursor-pointer
                   ${

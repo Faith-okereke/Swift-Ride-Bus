@@ -1,4 +1,4 @@
-import { formatDate, calcFee } from "../utils/helpers";
+import { formatDate, generateRef } from "../utils/helpers";
 import { useBookingStore } from "../store/bookingStore";
 import { Link } from "react-router";
 import { Icon } from "@iconify/react";
@@ -6,11 +6,14 @@ import { Icon } from "@iconify/react";
 export default function ConfirmPage() {
   const { booking, reset } = useBookingStore();
   const bus = booking.selectedBus;
-
+  const seatCount = booking?.selectedSeats.length;
   if (!bus) return null;
 
-  const base = bus.price * booking.selectedSeats.length;
-  const total = base + calcFee(base);
+  const base =
+    booking?.tripType === "round"
+      ? ((bus?.price ?? 0) * seatCount * 2).toLocaleString()
+      : ((bus?.price ?? 0) * seatCount).toLocaleString();
+  const total = base;
   const passengerName = `${booking.passenger.firstName} ${booking.passenger.lastName}`;
 
   return (
@@ -23,10 +26,7 @@ export default function ConfirmPage() {
           className="text-green-500"
         />
 
-        <h1
-          className="text-[32px] font-bold mb-2 text-[#0D0D0D]"
-          style={{ fontFamily: "'Playfair Display', serif" }}
-        >
+        <h1 className="text-[32px] font-bold mb-2 text-[#0D0D0D]">
           Booking Confirmed!
         </h1>
         <p className="text-[15px] text-[#7A7A7A] mb-8 max-w-sm mx-auto">
@@ -39,28 +39,18 @@ export default function ConfirmPage() {
       {/* Ticket */}
       <div className="bg-white border-[1.5px] border-[#E0DED7] rounded-[20px] overflow-hidden text-left mb-6 shadow-[0_4px_24px_rgba(0,0,0,0.08)]">
         {/* Ticket header */}
-        <div className="bg text-black px-6 py-5 flex items-center justify-between">
+        <div className="bg text-black px-6 py-3 flex items-center justify-between border-b-2 border-b-gray-300">
           <div>
-            <div
-              className="text-[20px] font-bold"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
+            <div className="text-[20px] font-bold">
               {booking.from} → {booking.to}
             </div>
-            <div className="text-[12px] text-white mt-0.5">
-              Ref: {booking.bookingRef}
+            <div className="text-[12px] mt-0.5">
+              Ref: {generateRef}
             </div>
           </div>
           <span className="bg-green-500 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wide">
             Confirmed
           </span>
-        </div>
-
-        {/* Dashed divider with circles */}
-        <div className="relative flex items-center px-4">
-          <div className="w-5 h-5 rounded-full bg-[#FAFAF8] border-[1.5px] border-[#E0DED7] -ml-7 shrink-0" />
-          <div className="flex-1 border-t-2 border-dashed border-[#E0DED7] mx-2" />
-          <div className="w-5 h-5 rounded-full bg-[#FAFAF8] border-[1.5px] border-[#E0DED7] -mr-7 shrink-0" />
         </div>
 
         {/* Ticket body */}
