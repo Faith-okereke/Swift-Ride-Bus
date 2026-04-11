@@ -98,7 +98,7 @@ export default function ConfirmPage() {
       <Link
         to={"/"}
         onClick={() => reset()}
-        className="px-8 py-3 bg-[#0D0D0D] text-white rounded-full text-[14px] font-semibold hover:bg-[#C84B11] transition-colors"
+        className="btn-primary rounded-full text-sm"
       >
         Book Another Trip
       </Link>

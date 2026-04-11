@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import { MapPin, ChevronDown, Search } from "lucide-react";
 import { CITIES } from "../hooks/useAutocomplete";
+import { Icon } from "@iconify/react";
 
 type Props = {
   label: string;
@@ -60,7 +60,7 @@ export default function LocationInput({
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className={`relative w-full flex items-center gap-2 pl-9 pr-3 py-2.75 border-[1.5px] text-[14px] text-left transition-all cursor-pointer
+        className={`relative w-full flex items-center gap-2 lg:pl-9 pl-2 pr-3 py-2.75 border-[1.5px] text-[14px] text-left transition-all cursor-pointer
           ${
             open
               ? "border-[#0D0D0D] border-b-transparent rounded-t-lg rounded-b-none bg-white"
@@ -69,8 +69,9 @@ export default function LocationInput({
                 : "border-[#E0DED7] rounded-lg bg-[#FAFAF8] hover:border-[#B8B8B8]"
           }`}
       >
-        <MapPin
-          size={15}
+        <Icon
+          icon={"ph:map-pin-light"}
+          fontSize={15}
           className="absolute left-3 top-1/2 -translate-y-1/2 text-[#7A7A7A] pointer-events-none shrink-0"
         />
         <span
@@ -78,8 +79,9 @@ export default function LocationInput({
         >
           {value || placeholder}
         </span>
-        <ChevronDown
-          size={14}
+        <Icon
+          icon={"mdi:menu-down"}
+          fontSize={14}
           className={`shrink-0 text-[#7A7A7A] transition-transform duration-200 ${open ? "rotate-180" : ""}`}
         />
       </button>
@@ -90,8 +92,9 @@ export default function LocationInput({
           {/* Search bar */}
           <div className="p-2 border-b border-[#E0DED7] sticky top-0 bg-white">
             <div className="relative">
-              <Search
-                size={13}
+              <Icon
+                icon="md:search"
+                fontSize={13}
                 className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#B8B8B8] pointer-events-none"
               />
               <input

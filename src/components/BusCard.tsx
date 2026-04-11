@@ -109,7 +109,7 @@ export default function BusCard({ bus, selected, onSelect }: props) {
             {bus.departure}
           </span>
         </div>
-        <button onClick={onSelect} className="btn-primary w-auto">
+        <button onClick={onSelect} className="btn-primary w-auto hidden lg:block">
           View Seats
         </button>
       </div>

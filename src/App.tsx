@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router";
 import PassengerInfo from "./pages/PassengerInfo";
 import NotFoundPage from "./components/NotFound";
+import BookingSummary from "./pages/BookingSummary";
 
 function AppContent() {
   const { pathname } = useLocation();
@@ -25,7 +26,8 @@ function AppContent() {
           <Route path="bus/:id/seats" element={<SeatPage />} />
           <Route path="personal-details" element={<PassengerInfo />} />
           <Route path="/booking-confirmation" element={<ConfirmPage />} />
-           <Route path="*" element={<NotFoundPage />} />
+          <Route path="booking-info" element={<BookingSummary />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
     </div>

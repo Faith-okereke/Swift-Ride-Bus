@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useState} from "react";
 import ProgressBar from "../components/ProgressBar";
 import { useBookingStore } from "../store/bookingStore";
-import toast from "react-hot-toast";
-import type { Bus } from "../types/Seats";
 import { useNavigate } from "react-router";
 import { Icon } from "@iconify/react";
+import toast from "react-hot-toast";
 
 type FieldProps = {
   label: string;
@@ -58,7 +57,7 @@ const Field = ({
   </div>
 );
 const PassengerInfo = () => {
-  const { booking, update } = useBookingStore();
+  const { update, booking } = useBookingStore();
   const navigate = useNavigate();
   const [errors, setErrors] = useState<ErrorType>({});
   const [form, setForm] = useState<FormType>({
@@ -84,41 +83,29 @@ const PassengerInfo = () => {
     setErrors(e);
     return Object.keys(e).length === 0;
   };
-  const initializePayment = () => {
-    const public_key = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
-    const bus = booking.selectedBus as Bus | null;
-    try {
-      // 2. Open Paystack Popup
-      // @ts-ignore (Because PaystackPop is loaded via script tag
-      const handler = PaystackPop.setup({
-        key: public_key,
-        email: form?.email,
-        amount: bus?.price && bus?.price * booking.passengers * 100,
-        ref: booking?.bookingRef,
-        callback: function (response: any) {
-          navigate("/booking-confirmation");
-          toast.success("Payment successful:", response);
-          update({
-            passenger: {
-              firstName: form?.firstName,
-              lastName: form.lastName,
-              email: form.email,
-              phone: form.phone,
-            },
-          });
-        },
-        onClose: () => {
-          toast.success("Transaction cancelled");
-          // setInitiating(false);
-        },
-      });
+  const submitPassengerDetails = (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-      handler.openIframe();
+    try {
+      if (validate()) {
+        update({
+          passenger: {
+            firstName: form?.firstName,
+            lastName: form?.lastName,
+            email: form?.email,
+            phone: form?.phone,
+          },
+        });
+        console.log(booking)
+        navigate("/booking-info");
+      } else {
+        toast.error("Please fill in all required data");
+      }
     } catch (error) {
-      console.error("Payment Error:", error);
-      toast.error("Failed to initiate payment. Check connection.");
+      console.log(error);
     }
   };
+
   return (
     <div className="">
       <ProgressBar currentStep={4} />
@@ -134,21 +121,20 @@ const PassengerInfo = () => {
         <form
           className="bg-white shadow-lg w-full py-10 px-6 flex flex-col gap-6 items-center justify-center rounded-2xl"
           onSubmit={(e) => {
-            e.preventDefault();
-            if (validate()) {
-              console.log("HELLO");
-              initializePayment();
-            }
+            e.preventDefault()
+            submitPassengerDetails(e);
           }}
         >
           <div className="text-center">
             <h1 className="text-2xl font-bold text-black uppercase  pb-3">
-              Passenger Info
+              Adult Passenger Info
             </h1>
-            <p>Enter your personal information or details of passenger</p>
+            <p>
+              Enter the personal information or details of an adult passenger
+            </p>
           </div>
 
-          <div className="flex justify-between items-center w-full gap-6 mb-3">
+          <div className="flex lg:flex-row flex-col justify-between lg:items-center items-stretch w-full gap-6 mb-3">
             <Field
               label="First Name"
               id="fn"
@@ -168,7 +154,7 @@ const PassengerInfo = () => {
               className="w-full"
             />
           </div>
-          <div className="flex justify-between items-center w-full gap-6 mb-3">
+          <div className="flex lg:flex-row flex-col justify-between items-center w-full gap-6 mb-3">
             <Field
               label="Email"
               id="em"
@@ -191,7 +177,7 @@ const PassengerInfo = () => {
             />
           </div>
           <button type="submit" className="btn-primary my-4 w-full">
-            Proceed to Payment
+            Next
           </button>
         </form>
       </div>

@@ -119,7 +119,7 @@ export default function SearchPage() {
             across Nigeria
           </h1>
           <p className="text-white/50 text-[16px] max-w-md mx-auto">
-            Safe, comfortable, affordable bus tickets — booked in minutes.
+            Safe, comfortable, affordable bus tickets booked in minutes.
           </p>
         </div>
       </div>
@@ -136,7 +136,10 @@ export default function SearchPage() {
               <button
                 type="button"
                 key={t.id}
-                onClick={() => update({ tripType: t.id })}
+                onClick={() => {
+                  update({ tripType: t.id });
+                  console.log(t.id);
+                }}
                 className={`flex-1 py-2.5 px-3 rounded-lg border-[1.5px] text-[13px] font-medium transition-all cursor-pointer
                   ${
                     booking?.tripType === t.id
@@ -150,8 +153,8 @@ export default function SearchPage() {
           </div>
 
           {/* Route Row */}
-          <div className="flex items-end gap-2 mb-3">
-            <div className="flex-1">
+          <div className="flex lg:flex-row flex-col lg:items-end items-stretch gap-2 mb-3 w-full">
+            <div className="lg:flex-1">
               <LocationInput
                 label="From"
                 value={booking.from}
@@ -165,16 +168,17 @@ export default function SearchPage() {
                 <p className="text-[11px] text-[#C84B11] mt-1">{errors.from}</p>
               )}
             </div>
+            <div className="flex justify-center items-center">
+              <button
+                onClick={swapLocations}
+                type="button"
+                className="w-9 h-9 lg:pb-0.5 rounded-full border-[1.5px] border-[#E0DED7] bg-[#FAFAF8] flex items-center justify-center hover:bg-[#0D0D0D] hover:border-[#0D0D0D] hover:text-white transition-all shrink-0 cursor-pointer "
+              >
+                <Icon icon={"eva:swap-fill"} fontSize={14} />
+              </button>
+            </div>
 
-            <button
-              onClick={swapLocations}
-              type="button"
-              className="w-9 h-9 pb-0.5 rounded-full border-[1.5px] border-[#E0DED7] bg-[#FAFAF8] flex items-center justify-center hover:bg-[#0D0D0D] hover:border-[#0D0D0D] hover:text-white transition-all shrink-0 cursor-pointer"
-            >
-              <Icon icon={"eva:swap-fill"} fontSize={14} />
-            </button>
-
-            <div className="flex-1">
+            <div className="lg:flex-1">
               <LocationInput
                 label="To"
                 value={booking.to}
@@ -192,7 +196,7 @@ export default function SearchPage() {
 
           {/* Date Row */}
           <div
-            className={`grid gap-3 mb-3 ${booking.tripType !== "one-way" ? "grid-cols-2" : "grid-cols-1 md:grid-cols-2"}`}
+            className={`grid gap-3 mb-3 ${booking.tripType !== "one-way" ? "lg:grid-cols-2 md:grid-cols-1" : "grid-cols-1 md:grid-cols-2"} `}
           >
             <div className="flex flex-col gap-1.25">
               <label className="text-[11px] font-semibold text-[#7A7A7A] uppercase tracking-[0.6px]">
@@ -223,7 +227,10 @@ export default function SearchPage() {
                 <input
                   type="date"
                   value={
-                    booking?.tripType === "round" || booking?.tripType==="hire" ? booking.returnDate : ""
+                    booking?.tripType === "round" ||
+                    booking?.tripType === "hire"
+                      ? booking.returnDate
+                      : ""
                   }
                   min={
                     booking.departDate || new Date().toISOString().split("T")[0]
@@ -263,32 +270,37 @@ export default function SearchPage() {
           </div>
 
           {/* Passengers */}
-          <div className="flex items-center justify-between px-4 py-3 border-[1.5px] border-[#E0DED7] rounded-lg bg-[#FAFAF8] mb-4">
-            <span className="text-[13px] text-[#3A3A3A]">Passengers</span>
-            <div className="flex items-center gap-1">
-              <Icon
-                icon={"ei:minus"}
-                fontSize={30}
-                onClick={() =>
-                  update({ passengers: Math.max(1, booking.passengers - 1) })
-                }
-                className="leading-none hover:border-[#0D0D0D] transition-colors cursor-pointer"
-              >
-                −
-              </Icon>
-              <span className="text-[15px] font-semibold w-5 text-center">
-                {booking.passengers}
-              </span>
-              <Icon
-                icon={"ei:plus"}
-                fontSize={30}
-                onClick={() =>
-                  update({ passengers: Math.min(6, booking.passengers + 1) })
-                }
-                className="leading-none hover:border-[#0D0D0D] transition-colors cursor-pointer"
-              >
-                +
-              </Icon>
+          <div>
+            <label className="lg:hidden block text-[11px] font-semibold text-[#7A7A7A] uppercase tracking-[0.6px] pb-3">
+              Number of passengers
+            </label>
+            <div className="flex items-center justify-between px-4 py-3 border-[1.5px] border-[#E0DED7] rounded-lg bg-[#FAFAF8] mb-4">
+              <span className="text-[13px] text-[#3A3A3A]">Passengers</span>
+              <div className="flex items-center gap-1">
+                <Icon
+                  icon={"ei:minus"}
+                  fontSize={30}
+                  onClick={() =>
+                    update({ passengers: Math.max(1, booking.passengers - 1) })
+                  }
+                  className="leading-none hover:border-[#0D0D0D] transition-colors cursor-pointer"
+                >
+                  −
+                </Icon>
+                <span className="text-[15px] font-semibold w-5 text-center">
+                  {booking.passengers}
+                </span>
+                <Icon
+                  icon={"ei:plus"}
+                  fontSize={30}
+                  onClick={() =>
+                    update({ passengers: Math.min(6, booking.passengers + 1) })
+                  }
+                  className="leading-none hover:border-[#0D0D0D] transition-colors cursor-pointer"
+                >
+                  +
+                </Icon>
+              </div>
             </div>
           </div>
 
@@ -314,7 +326,7 @@ export default function SearchPage() {
       </form>
 
       {/* Features */}
-      <div className="max-w-3xl mx-auto px-4 mb-16 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="max-w-3xl mx-auto px-4 mb-16 grid grid-cols-1 md:grid-cols-3 gap-4 pb-12">
         {FEATURES.map(({ icon, title, desc }) => (
           <div
             key={title}
