@@ -1,0 +1,620 @@
+[
+    {
+        "id": "b1",
+        "image": "/images/peace-mass.webp",
+        "name": "Peace Mass Transit",
+        "shortName": "PMT",
+        "capacity": 18,
+        "price": 9500,
+        "departure": "06:00 AM",
+        "arrival": "02:30 PM",
+        "duration": "8h 30m",
+        "from": "Lagos",
+        "to": "Abuja",
+        "seatsTaken": [
+            1,
+            4,
+            7,
+            11,
+            14,
+            3
+        ],
+        "ac": true,
+        "wifi": false,
+        "terminal": "Mile 2 Motor Park, Lagos",
+        "tag": "Popular",
+        "tagColor": "green",
+        "amenities": [
+            "AC",
+            "Reclining Seats",
+            "Onboard TV"
+        ],
+        "hire": true,
+        "hirePrice": 120000
+    },
+    {
+        "id": "b2",
+        "image": "/images/GUO.webp",
+        "name": "GUO Transport",
+        "shortName": "GUO",
+        "capacity": 14,
+        "price": 12000,
+        "departure": "08:00 AM",
+        "arrival": "04:00 PM",
+        "duration": "8h 00m",
+        "from": "Lagos",
+        "to": "Enugu",
+        "seatsTaken": [
+            2,
+            5,
+            6,
+            10,
+            13
+        ],
+        "ac": true,
+        "wifi": true,
+        "terminal": "Ojota Motor Park, Lagos",
+        "tag": "Few Seats",
+        "tagColor": "amber",
+        "amenities": [
+            "AC",
+            "WiFi",
+            "USB Charging",
+            "Snacks"
+        ],
+        "hire": true,
+        "hirePrice": 150000
+    },
+    {
+        "id": "b3",
+        "image": "/images/ABC-bus.webp",
+        "name": "ABC Transport",
+        "shortName": "ABC",
+        "capacity": 18,
+        "price": 8200,
+        "departure": "10:30 AM",
+        "arrival": "07:00 PM",
+        "duration": "8h 30m",
+        "from": "Abuja",
+        "to": "Kaduna",
+        "seatsTaken": [
+            1,
+            2,
+            3,
+            7,
+            8,
+            9,
+            13,
+            14,
+            15
+        ],
+        "ac": false,
+        "wifi": false,
+        "terminal": "Utako, Abuja",
+        "tag": "Budget",
+        "tagColor": "green",
+        "amenities": [
+            "Reclining Seats"
+        ],
+        "hire": false,
+        "hirePrice": 0
+    },
+    {
+        "id": "b4",
+        "image": "/images/GIGM.webp",
+        "name": "God is Good Motors",
+        "shortName": "GIGM",
+        "capacity": 14,
+        "price": 14500,
+        "departure": "07:00 PM",
+        "arrival": "05:30 AM",
+        "duration": "10h 30m",
+        "from": "Lagos",
+        "to": "Port Harcourt",
+        "seatsTaken": [
+            3,
+            6,
+            9,
+            12
+        ],
+        "ac": true,
+        "wifi": true,
+        "terminal": "Yaba, Lagos",
+        "tag": "Night Bus",
+        "tagColor": "blue",
+        "amenities": [
+            "AC",
+            "WiFi",
+            "USB Charging",
+            "Blanket",
+            "Snacks"
+        ],
+        "hire": true,
+        "hirePrice": 180000
+    },
+    {
+        "id": "b5",
+        "image": "/images/agofure.webp",
+        "name": "Agofure Motors",
+        "shortName": "Agofure",
+        "capacity": 18,
+        "price": 9000,
+        "departure": "09:00 AM",
+        "arrival": "06:30 PM",
+        "duration": "9h 30m",
+        "from": "Benin City",
+        "to": "Warri",
+        "seatsTaken": [
+            2,
+            5,
+            8,
+            11,
+            14
+        ],
+        "ac": false,
+        "wifi": false,
+        "terminal": "Benin Terminal",
+        "tag": "Standard",
+        "tagColor": "red",
+        "amenities": [
+            "Reclining Seats",
+            "Onboard TV"
+        ],
+        "hire": true,
+        "hirePrice": 100000
+    },
+    {
+        "id": "b6",
+        "image": "/images/peace-mass.webp",
+        "name": "Peace Mass Transit",
+        "shortName": "PMT",
+        "capacity": 18,
+        "price": 10000,
+        "departure": "12:00 PM",
+        "arrival": "08:30 PM",
+        "duration": "8h 30m",
+        "from": "Ibadan",
+        "to": "Abuja",
+        "seatsTaken": [
+            1,
+            5,
+            9,
+            12
+        ],
+        "ac": true,
+        "wifi": false,
+        "terminal": "Ibadan Terminal",
+        "tag": "Afternoon",
+        "tagColor": "blue",
+        "amenities": [
+            "AC",
+            "Reclining Seats"
+        ],
+        "hire": true,
+        "hirePrice": 125000
+    },
+    {
+        "id": "b7",
+        "image": "/images/GUO.webp",
+        "name": "GUO Transport",
+        "shortName": "GUO",
+        "capacity": 14,
+        "price": 13500,
+        "departure": "05:30 AM",
+        "arrival": "01:30 PM",
+        "duration": "8h 00m",
+        "from": "Onitsha",
+        "to": "Lagos",
+        "seatsTaken": [
+            3,
+            6,
+            7,
+            11
+        ],
+        "ac": true,
+        "wifi": true,
+        "terminal": "Onitsha Park",
+        "tag": "Early Bird",
+        "tagColor": "green",
+        "amenities": [
+            "AC",
+            "WiFi",
+            "Snacks"
+        ],
+        "hire": false,
+        "hirePrice": 0
+    },
+    {
+        "id": "b8",
+        "image": "/images/ABC-bus.webp",
+        "name": "ABC Transport",
+        "shortName": "ABC",
+        "capacity": 18,
+        "price": 7800,
+        "departure": "03:00 PM",
+        "arrival": "11:00 PM",
+        "duration": "8h 00m",
+        "from": "Enugu",
+        "to": "Owerri",
+        "seatsTaken": [
+            2,
+            4,
+            6,
+            8,
+            10,
+            12
+        ],
+        "ac": false,
+        "wifi": false,
+        "terminal": "Enugu Terminal",
+        "tag": "Economy",
+        "tagColor": "green",
+        "amenities": [
+            "Reclining Seats"
+        ],
+        "hire": false,
+        "hirePrice": 0
+    },
+    {
+        "id": "b9",
+        "image": "/images/GIGM.webp",
+        "name": "God is Good Motors",
+        "shortName": "GIGM",
+        "capacity": 14,
+        "price": 15000,
+        "departure": "09:00 PM",
+        "arrival": "07:30 AM",
+        "duration": "10h 30m",
+        "from": "Abuja",
+        "to": "Calabar",
+        "seatsTaken": [
+            1,
+            2,
+            3,
+            4,
+            5
+        ],
+        "ac": true,
+        "wifi": true,
+        "terminal": "Utako, Abuja",
+        "tag": "Luxury Night",
+        "tagColor": "purple",
+        "amenities": [
+            "AC",
+            "WiFi",
+            "Blanket",
+            "Snacks"
+        ],
+        "hire": true,
+        "hirePrice": 170000
+    },
+    {
+        "id": "b10",
+        "image": "/images/agofure.webp",
+        "name": "Agofure Motors",
+        "shortName": "Agofure",
+        "capacity": 18,
+        "price": 8800,
+        "departure": "11:00 AM",
+        "arrival": "08:30 PM",
+        "duration": "9h 30m",
+        "from": "Warri",
+        "to": "Asaba",
+        "seatsTaken": [
+            1,
+            3,
+            5,
+            7,
+            9
+        ],
+        "ac": false,
+        "wifi": false,
+        "terminal": "Warri Park",
+        "tag": "Standard",
+        "tagColor": "red",
+        "amenities": [
+            "Reclining Seats",
+            "Onboard TV"
+        ],
+        "hire": true,
+        "hirePrice": 95000
+    },
+    {
+        "id": "b11",
+        "image": "/images/peace-mass.webp",
+        "name": "Peace Mass Transit",
+        "shortName": "PMT",
+        "capacity": 18,
+        "price": 9800,
+        "departure": "06:30 AM",
+        "arrival": "02:00 PM",
+        "duration": "7h 30m",
+        "from": "Lagos",
+        "to": "Ibadan",
+        "seatsTaken": [
+            1,
+            3,
+            5,
+            7
+        ],
+        "ac": true,
+        "wifi": false,
+        "terminal": "Mile 2, Lagos",
+        "tag": "Popular",
+        "tagColor": "green",
+        "amenities": [
+            "AC",
+            "Reclining Seats"
+        ],
+        "hire": true,
+        "hirePrice": 110000
+    },
+    {
+        "id": "b12",
+        "image": "/images/GUO.webp",
+        "name": "GUO Transport",
+        "shortName": "GUO",
+        "capacity": 14,
+        "price": 13000,
+        "departure": "07:00 AM",
+        "arrival": "03:30 PM",
+        "duration": "8h 30m",
+        "from": "Abuja",
+        "to": "Lagos",
+        "seatsTaken": [
+            2,
+            6,
+            9
+        ],
+        "ac": true,
+        "wifi": true,
+        "terminal": "Utako, Abuja",
+        "tag": "High Demand",
+        "tagColor": "amber",
+        "amenities": [
+            "AC",
+            "WiFi",
+            "USB Charging"
+        ],
+        "hire": true,
+        "hirePrice": 200000
+    },
+    {
+        "id": "b13",
+        "image": "/images/ABC-bus.webp",
+        "name": "ABC Transport",
+        "shortName": "ABC",
+        "capacity": 18,
+        "price": 8500,
+        "departure": "09:00 AM",
+        "arrival": "05:00 PM",
+        "duration": "8h 00m",
+        "from": "Enugu",
+        "to": "Abuja",
+        "seatsTaken": [
+            1,
+            2,
+            4,
+            6
+        ],
+        "ac": false,
+        "wifi": false,
+        "terminal": "Enugu Park",
+        "tag": "Budget",
+        "tagColor": "green",
+        "amenities": [
+            "Reclining Seats"
+        ],
+        "hire": false,
+        "hirePrice": 0
+    },
+    {
+        "id": "b14",
+        "image": "/images/GIGM.webp",
+        "name": "God is Good Motors",
+        "shortName": "GIGM",
+        "capacity": 14,
+        "price": 15500,
+        "departure": "08:00 PM",
+        "arrival": "06:30 AM",
+        "duration": "10h 30m",
+        "from": "Lagos",
+        "to": "Port Harcourt",
+        "seatsTaken": [
+            3,
+            7,
+            11
+        ],
+        "ac": true,
+        "wifi": true,
+        "terminal": "Yaba, Lagos",
+        "tag": "Night Luxury",
+        "tagColor": "purple",
+        "amenities": [
+            "AC",
+            "WiFi",
+            "Blanket",
+            "Snacks"
+        ],
+        "hire": true,
+        "hirePrice": 180000
+    },
+    {
+        "id": "b15",
+        "image": "/images/agofure.webp",
+        "name": "Agofure Motors",
+        "shortName": "Agofure",
+        "capacity": 18,
+        "price": 9200,
+        "departure": "10:00 AM",
+        "arrival": "06:30 PM",
+        "duration": "8h 30m",
+        "from": "Warri",
+        "to": "Lagos",
+        "seatsTaken": [
+            1,
+            5,
+            8,
+            12
+        ],
+        "ac": false,
+        "wifi": false,
+        "terminal": "Warri Park",
+        "tag": "Standard",
+        "tagColor": "red",
+        "amenities": [
+            "Reclining Seats",
+            "Onboard TV"
+        ],
+        "hire": true,
+        "hirePrice": 130000
+    },
+    {
+        "id": "b16",
+        "image": "/images/peace-mass.webp",
+        "name": "Peace Mass Transit",
+        "shortName": "PMT",
+        "capacity": 18,
+        "price": 9900,
+        "departure": "11:30 AM",
+        "arrival": "07:30 PM",
+        "duration": "8h 00m",
+        "from": "Ibadan",
+        "to": "Lagos",
+        "seatsTaken": [
+            2,
+            6,
+            10
+        ],
+        "ac": true,
+        "wifi": false,
+        "terminal": "Ibadan Terminal",
+        "tag": "Afternoon",
+        "tagColor": "blue",
+        "amenities": [
+            "AC",
+            "Reclining Seats"
+        ],
+        "hire": true,
+        "hirePrice": 115000
+    },
+    {
+        "id": "b17",
+        "image": "/images/GUO.webp",
+        "name": "GUO Transport",
+        "shortName": "GUO",
+        "capacity": 14,
+        "price": 14000,
+        "departure": "05:00 AM",
+        "arrival": "01:00 PM",
+        "duration": "8h 00m",
+        "from": "Onitsha",
+        "to": "Abuja",
+        "seatsTaken": [
+            3,
+            9,
+            11
+        ],
+        "ac": true,
+        "wifi": true,
+        "terminal": "Onitsha Park",
+        "tag": "Early Bird",
+        "tagColor": "green",
+        "amenities": [
+            "AC",
+            "WiFi",
+            "Snacks"
+        ],
+        "hire": false,
+        "hirePrice": 0
+    },
+    {
+        "id": "b18",
+        "image": "/images/ABC-bus.webp",
+        "name": "ABC Transport",
+        "shortName": "ABC",
+        "capacity": 18,
+        "price": 8000,
+        "departure": "02:00 PM",
+        "arrival": "10:00 PM",
+        "duration": "8h 00m",
+        "from": "Calabar",
+        "to": "Uyo",
+        "seatsTaken": [
+            1,
+            4,
+            7,
+            10
+        ],
+        "ac": false,
+        "wifi": false,
+        "terminal": "Calabar Park",
+        "tag": "Budget",
+        "tagColor": "green",
+        "amenities": [
+            "Reclining Seats"
+        ],
+        "hire": false,
+        "hirePrice": 0
+    },
+    {
+        "id": "b19",
+        "image": "/images/GIGM.webp",
+        "name": "God is Good Motors",
+        "shortName": "GIGM",
+        "capacity": 14,
+        "price": 16000,
+        "departure": "09:30 PM",
+        "arrival": "07:00 AM",
+        "duration": "9h 30m",
+        "from": "Abuja",
+        "to": "Port Harcourt",
+        "seatsTaken": [
+            2,
+            5,
+            8
+        ],
+        "ac": true,
+        "wifi": true,
+        "terminal": "Utako, Abuja",
+        "tag": "Luxury Night",
+        "tagColor": "purple",
+        "amenities": [
+            "AC",
+            "WiFi",
+            "Blanket"
+        ],
+        "hire": true,
+        "hirePrice": 190000
+    },
+    {
+        "id": "b20",
+        "image": "/images/agofure.webp",
+        "name": "Agofure Motors",
+        "shortName": "Agofure",
+        "capacity": 18,
+        "price": 8700,
+        "departure": "12:00 PM",
+        "arrival": "08:30 PM",
+        "duration": "8h 30m",
+        "from": "Benin City",
+        "to": "Lagos",
+        "seatsTaken": [
+            1,
+            3,
+            6,
+            9
+        ],
+        "ac": false,
+        "wifi": false,
+        "terminal": "Benin Terminal",
+        "tag": "Standard",
+        "tagColor": "red",
+        "amenities": [
+            "Reclining Seats",
+            "Onboard TV"
+        ],
+        "hire": true,
+        "hirePrice": 125000
+    }
+]
