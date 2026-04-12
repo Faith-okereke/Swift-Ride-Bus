@@ -1,75 +1,104 @@
-# React + TypeScript + Vite
+# SwiftRide Bus Transport System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive bus transportation booking web app built with **React + TypeScript + Tailwind CSS + Zustand**.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+| Tool | Purpose |
+|------|---------|
+| React 19 + Vite | UI framework & dev server |
+| TypeScript | Static typing across the entire codebase |
+| Tailwind CSS v4 | Utility-first styling |
+| Zustand | Global state management |
+| React Router v7 | Client-side routing |
+| Iconify | Icon library |
+| React Hot Toast | Toast notifications |
+| Paystack | Payment processing (test mode) |
 
-## React Compiler
+## Setup Instructions
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 1. Clone the repository
+```bash
+git clone https://github.com/Faith-okereke/Swift-Ride-Bus.git
+cd Swift-Ride-Bus
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 2. Install dependencies
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 3. Set up environment variables
+Create a `.env` file in the root of the project and add:
+```env
+VITE_PAYSTACK_PUBLIC_KEY=your_paystack_public_key_here
 ```
-"# Swift-Ride-Bus" 
-"# Swift-Ride-Bus" 
+> Get your test public key from [dashboard.paystack.com](https://dashboard.paystack.com) under Settings → API Keys.
+
+### 4. Start the development server
+```bash
+npm run dev
+```
+App runs at `http://localhost:5173`
+
+### 5. Build for production
+```bash
+npm run build
+```
+
+---
+
+## Project Structure
+src/
+├── components/       # Reusable UI components (Navbar, ProgressBar, BusCard, LocationInput, DateInput...)
+├── data/             # buses.json — mock bus data
+├── pages/            # Route-level page components
+├── store/            # Zustand booking store
+├── types/            # Shared TypeScript interfaces and types
+└── utils/            # Helper functions (formatNaira, generateRef, calcFee...)
+
+---
+
+## Routes
+
+| Path | Page | Description |
+|------|------|-------------|
+| `/` | `SearchPage` | Trip search — type, route, date, passengers |
+| `/search-results/buses` | `BusListPage` | Available buses for selected route |
+| `/bus/:id/seats` | `SeatPage` | Visual seat map for selected bus |
+| `/personal-details` | `PassengerInfo` | Passenger details form |
+| `/booking-info` | `BookingSummary` | Full booking summary before payment |
+| `/booking-confirmation` | `ConfirmPage` | Confirmation screen after successful payment |
+| `*` | `NotFoundPage` | 404 fallback |
+
+---
+
+## Assumptions
+
+- All available departure and destination locations are major cities in Nigeria.
+- The person making the booking is an adult — no child/infant passenger types are handled.
+- All buses in `buses.json` are shown for any searched route — there is no backend filtering by route or date. Filtering is hook-ready on the frontend.
+- Seat availability is session-only and resets on page refresh — there is no backend persistence.
+- One seat must be selected per passenger (e.g. 2 passengers = 2 seats).
+- The first seat in every bus is the driver's seat and cannot be selected.
+- For round trips, the return fare is calculated as double the one-way price.
+- For bus hire, a separate flat `hirePrice` is used instead of the per-seat price.
+- Payment runs in Paystack sandbox/test mode — no real charges are made.
+- The app is optimized for use by a single adult booking on their own behalf.
+
+---
+
+## Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `VITE_PAYSTACK_PUBLIC_KEY` | Your Paystack public key (test or live) |
+
+> For deployment on Vercel, add this variable under **Project → Settings → Environment Variables** instead of committing a `.env` file.
+
+## Github Repository Link
+
+[Github Link](https://github.com/Faith-okereke/Swift-Ride-Bus)
+
+## Live Demo
+
+[View on Vercel](https://swift-ride-bus.vercel.app)
