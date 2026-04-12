@@ -48,39 +48,41 @@ npm run build
 ---
 
 ## Project Structure
-📦src
- ┣ 📂assets
- ┃ ┣ 📜hero.png
- ┃ ┣ 📜react.svg
- ┃ ┗ 📜vite.svg
- ┣ 📂components
- ┃ ┣ 📜BusCard.tsx
- ┃ ┣ 📜LocationInput.tsx
- ┃ ┣ 📜Navbar.tsx
- ┃ ┣ 📜NotFound.tsx
- ┃ ┗ 📜ProgressBar.tsx
- ┣ 📂data
- ┃ ┗ 📜buses.json
- ┣ 📂hooks
- ┃ ┗ 📜useAutocomplete.ts
- ┣ 📂pages
- ┃ ┣ 📜BookingSummary.tsx
- ┃ ┣ 📜BusListPage.tsx
- ┃ ┣ 📜ConfirmPage.tsx
- ┃ ┣ 📜PassengerInfo.tsx
- ┃ ┣ 📜SearchPage.tsx
- ┃ ┗ 📜SeatPage.tsx
- ┣ 📂store
- ┃ ┗ 📜bookingStore.ts
- ┣ 📂types
- ┃ ┗ 📜Seats.ts
- ┣ 📂utils
- ┃ ┗ 📜helpers.ts
- ┣ 📜App.css
- ┣ 📜App.tsx
- ┣ 📜index.css
- ┗ 📜main.tsx
 
+```
+src/
+├── assets/
+│   ├── hero.png
+│   ├── react.svg
+│   └── vite.svg
+├── components/
+│   ├── BusCard.tsx
+│   ├── LocationInput.tsx
+│   ├── Navbar.tsx
+│   ├── NotFound.tsx
+│   └── ProgressBar.tsx
+├── data/
+│   └── buses.json
+├── hooks/
+│   └── useAutocomplete.ts
+├── pages/
+│   ├── BookingSummary.tsx
+│   ├── BusListPage.tsx
+│   ├── ConfirmPage.tsx
+│   ├── PassengerInfo.tsx
+│   ├── SearchPage.tsx
+│   └── SeatPage.tsx
+├── store/
+│   └── bookingStore.ts
+├── types/
+│   └── Seats.ts
+├── utils/
+│   └── helpers.ts
+├── App.css
+├── App.tsx
+├── index.css
+└── main.tsx
+```
 ## Routes
 
 | Path | Page | Description |
