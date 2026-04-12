@@ -48,15 +48,38 @@ npm run build
 ---
 
 ## Project Structure
-src/
-├── components/       # Reusable UI components (Navbar, ProgressBar, BusCard, LocationInput, DateInput...)
-├── data/             # buses.json — mock bus data
-├── pages/            # Route-level page components
-├── store/            # Zustand booking store
-├── types/            # Shared TypeScript interfaces and types
-└── utils/            # Helper functions (formatNaira, generateRef, calcFee...)
-
----
+📦src
+ ┣ 📂assets
+ ┃ ┣ 📜hero.png
+ ┃ ┣ 📜react.svg
+ ┃ ┗ 📜vite.svg
+ ┣ 📂components
+ ┃ ┣ 📜BusCard.tsx
+ ┃ ┣ 📜LocationInput.tsx
+ ┃ ┣ 📜Navbar.tsx
+ ┃ ┣ 📜NotFound.tsx
+ ┃ ┗ 📜ProgressBar.tsx
+ ┣ 📂data
+ ┃ ┗ 📜buses.json
+ ┣ 📂hooks
+ ┃ ┗ 📜useAutocomplete.ts
+ ┣ 📂pages
+ ┃ ┣ 📜BookingSummary.tsx
+ ┃ ┣ 📜BusListPage.tsx
+ ┃ ┣ 📜ConfirmPage.tsx
+ ┃ ┣ 📜PassengerInfo.tsx
+ ┃ ┣ 📜SearchPage.tsx
+ ┃ ┗ 📜SeatPage.tsx
+ ┣ 📂store
+ ┃ ┗ 📜bookingStore.ts
+ ┣ 📂types
+ ┃ ┗ 📜Seats.ts
+ ┣ 📂utils
+ ┃ ┗ 📜helpers.ts
+ ┣ 📜App.css
+ ┣ 📜App.tsx
+ ┣ 📜index.css
+ ┗ 📜main.tsx
 
 ## Routes
 

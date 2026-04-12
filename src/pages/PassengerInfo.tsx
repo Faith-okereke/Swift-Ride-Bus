@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 import ProgressBar from "../components/ProgressBar";
 import { useBookingStore } from "../store/bookingStore";
 import { useNavigate } from "react-router";
@@ -57,7 +57,7 @@ const Field = ({
   </div>
 );
 const PassengerInfo = () => {
-  const { update, booking } = useBookingStore();
+  const { update } = useBookingStore();
   const navigate = useNavigate();
   const [errors, setErrors] = useState<ErrorType>({});
   const [form, setForm] = useState<FormType>({
@@ -96,7 +96,7 @@ const PassengerInfo = () => {
             phone: form?.phone,
           },
         });
-        console.log(booking)
+
         navigate("/booking-info");
       } else {
         toast.error("Please fill in all required data");
@@ -121,7 +121,7 @@ const PassengerInfo = () => {
         <form
           className="bg-white shadow-lg w-full py-10 px-6 flex flex-col gap-6 items-center justify-center rounded-2xl"
           onSubmit={(e) => {
-            e.preventDefault()
+            e.preventDefault();
             submitPassengerDetails(e);
           }}
         >

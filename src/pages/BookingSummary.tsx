@@ -8,7 +8,6 @@ import toast from "react-hot-toast";
 import { useBookingStore } from "../store/bookingStore";
 
 function BookingSummary() {
-  console.log("Paystack key:", import.meta.env.VITE_PAYSTACK_PUBLIC_KEY)
   const { booking } = useBookingStore();
   const navigate = useNavigate();
   const seatCount = booking.selectedSeats.length;
