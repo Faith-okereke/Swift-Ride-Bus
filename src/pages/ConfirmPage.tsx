@@ -1,19 +1,14 @@
-import { formatDate, generateRef } from "../utils/helpers";
+import { calculateTotalPrice, formatDate, generateRef } from "../utils/helpers";
 import { useBookingStore } from "../store/bookingStore";
 import { Link } from "react-router";
 import { Icon } from "@iconify/react";
+import type { Bus } from "../types/booking";
 
 export default function ConfirmPage() {
   const { booking, reset } = useBookingStore();
-  const bus = booking.selectedBus;
-  const seatCount = booking?.selectedSeats.length;
+  const bus = booking.selectedBus as Bus;
   if (!bus) return null;
 
-  const base =
-    booking?.tripType === "round"
-      ? ((bus?.price ?? 0) * seatCount * 2).toLocaleString()
-      : ((bus?.price ?? 0) * seatCount).toLocaleString();
-  const total = base;
   const passengerName = `${booking.passenger.firstName} ${booking.passenger.lastName}`;
 
   return (
@@ -41,12 +36,12 @@ export default function ConfirmPage() {
         {/* Ticket header */}
         <div className="bg text-black px-6 py-3 flex items-center justify-between border-b-2 border-b-gray-300">
           <div>
-            <div className="text-[20px] font-bold">
-              {booking.from} → {booking.to}
+            <div className="text-[20px] font-bold flex justify-normal items-center gap-2">
+              <span>{booking.from}</span>
+              <Icon icon="maki:arrow" />
+              <span>{booking.to}</span>
             </div>
-            <div className="text-[12px] mt-0.5">
-              Ref: {generateRef}
-            </div>
+            <div className="text-[12px] mt-0.5">Ref: {generateRef}</div>
           </div>
           <span className="bg-green-500 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wide">
             Confirmed
@@ -56,9 +51,18 @@ export default function ConfirmPage() {
         {/* Ticket body */}
         <div className="grid grid-cols-2 gap-4 p-6">
           {[
+            { label: "Terminal", value: bus.terminal },
             { label: "Passenger", value: passengerName },
-            { label: "Date", value: formatDate(booking.departDate) },
-            { label: "Departure", value: bus.departure },
+            //  { label: "Date Booked", value: formatDate(booking.) },
+            { label: "Departure time", value: bus.departure },
+            {
+              label: "Date of Departure",
+              value: formatDate(booking.departDate),
+            },
+            {
+              label: "Date of Return",
+              value: formatDate(booking?.returnDate) || "Not Round Trip",
+            },
             { label: "Trip type", value: booking.tripType },
             {
               label: "Seat(s) Number",
@@ -67,7 +71,13 @@ export default function ConfirmPage() {
             { label: "Bus", value: bus.name },
             {
               label: "Amount Paid",
-              value: `₦${total.toLocaleString()}`,
+              value: ` ₦ ${calculateTotalPrice(
+                bus?.price,
+                bus?.hirePrice,
+                booking?.tripType,
+                booking?.passengers,
+                booking?.hireDuration,
+              )}}`,
               accent: true,
             },
           ].map(({ label, value, accent }) => (

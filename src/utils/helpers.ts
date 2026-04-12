@@ -1,3 +1,4 @@
+
 export const generateRef =
   'BK-' + Date.now().toString().slice(-8).toUpperCase();
 
@@ -30,3 +31,20 @@ export const formatDateShort = (dateStr: string) => {
  */
 export const today = () => new Date().toISOString().split('T')[0];
 
+export const calculateTotalPrice = (
+  basePrice: number | undefined,
+  hirePrice: number | undefined,
+  tripType: string | undefined,
+  passengers: number,
+  hireDuration?: number | undefined,
+): string => {
+  if (tripType === "hire") {
+    return ((hirePrice ?? 0) * (hireDuration ?? 1)).toLocaleString();
+  }
+
+  if (tripType === "round") {
+    return ((basePrice ?? 0) * passengers * 2).toLocaleString();
+  }
+
+  return ((basePrice ?? 0) * passengers).toLocaleString();
+};

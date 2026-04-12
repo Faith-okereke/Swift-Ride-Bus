@@ -110,9 +110,7 @@ export default function SearchPage() {
             <span className="w-2 h-2 rounded-full bg-[#C84B11] inline-block" />
             Nigeria's #1 Bus Network · 200+ Routes
           </div>
-          <h1
-            className="text-5xl md:text-6xl font-bold leading-[1.1] mb-4 tracking-tight"
-          >
+          <h1 className="text-5xl md:text-6xl font-bold leading-[1.1] mb-4 tracking-tight">
             Travel <em className="text-[#C84B11] not-italic">anywhere</em>
             <br />
             across Nigeria
@@ -253,54 +251,62 @@ export default function SearchPage() {
                   Duration
                 </label>
                 <select
-                  value={booking.hireDuration || "1 day"}
-                  onChange={(e) => update({ hireDuration: e.target.value })}
-                  className="px-3 py-2.75 border-[1.5px] border-[#E0DED7] rounded-lg text-[14px] text-[#0D0D0D] bg-[#FAFAF8] outline-none focus:border-[#0D0D0D] transition-colors"
+                  value={booking.hireDuration || 1}
+                  onChange={(e) => {
+                    update({ hireDuration: Number(e.target.value) });
+                  }}
+                  className="px-3 py-2.75 border-[1.5px] border-[#E0DED7] rounded-lg text-[14px] text-[#0D0D0D] bg-[#FAFAF8] outline-none focus:border-[#0D0D0D] transition-colors cursor-pointer"
                 >
-                  {["1 day", "2 days", "3 days", "5 days", "7 days"].map(
-                    (d) => (
-                      <option key={d}>{d}</option>
-                    ),
-                  )}
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((d) => (
+                    <option value={d} key={d}>
+                      {d} {d === 1 ? "day" : "days"}
+                    </option>
+                  ))}
                 </select>
               </div>
             )}
           </div>
 
           {/* Passengers */}
-          <div>
-            <label className="lg:hidden block text-[11px] font-semibold text-[#7A7A7A] uppercase tracking-[0.6px] pb-3">
-              Number of passengers
-            </label>
-            <div className="flex items-center justify-between px-4 py-3 border-[1.5px] border-[#E0DED7] rounded-lg bg-[#FAFAF8] mb-4">
-              <span className="text-[13px] text-[#3A3A3A]">Passengers</span>
-              <div className="flex items-center gap-1">
-                <Icon
-                  icon={"ei:minus"}
-                  fontSize={30}
-                  onClick={() =>
-                    update({ passengers: Math.max(1, booking.passengers - 1) })
-                  }
-                  className="leading-none hover:border-[#0D0D0D] transition-colors cursor-pointer"
-                >
-                  −
-                </Icon>
-                <span className="text-[15px] font-semibold w-5 text-center">
-                  {booking.passengers}
-                </span>
-                <Icon
-                  icon={"ei:plus"}
-                  fontSize={30}
-                  onClick={() =>
-                    update({ passengers: Math.min(6, booking.passengers + 1) })
-                  }
-                  className="leading-none hover:border-[#0D0D0D] transition-colors cursor-pointer"
-                >
-                  +
-                </Icon>
+          {booking?.tripType !== "hire" && (
+            <div>
+              <label className="lg:hidden block text-[11px] font-semibold text-[#7A7A7A] uppercase tracking-[0.6px] pb-3">
+                Number of passengers
+              </label>
+              <div className="flex items-center justify-between px-4 py-3 border-[1.5px] border-[#E0DED7] rounded-lg bg-[#FAFAF8] mb-4">
+                <span className="text-[13px] text-[#3A3A3A]">Passengers</span>
+                <div className="flex items-center gap-1">
+                  <Icon
+                    icon={"ei:minus"}
+                    fontSize={30}
+                    onClick={() =>
+                      update({
+                        passengers: Math.max(1, booking.passengers - 1),
+                      })
+                    }
+                    className="leading-none hover:border-[#0D0D0D] transition-colors cursor-pointer"
+                  >
+                    −
+                  </Icon>
+                  <span className="text-[15px] font-semibold w-5 text-center">
+                    {booking.passengers}
+                  </span>
+                  <Icon
+                    icon={"ei:plus"}
+                    fontSize={30}
+                    onClick={() =>
+                      update({
+                        passengers: Math.min(6, booking.passengers + 1),
+                      })
+                    }
+                    className="leading-none hover:border-[#0D0D0D] transition-colors cursor-pointer"
+                  >
+                    +
+                  </Icon>
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           {/* Search Button */}
           <button

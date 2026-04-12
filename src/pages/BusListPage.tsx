@@ -5,7 +5,7 @@ import { formatDateShort } from "../utils/helpers";
 import { useNavigate } from "react-router";
 import { Icon } from "@iconify/react";
 import busData from "../data/buses.json";
-import type { Bus } from "../types/Seats";
+import type { Bus } from "../types/booking";
 
 const BUSES = busData as Bus[];
 
@@ -25,7 +25,6 @@ export default function BusListPage() {
 
   const handleSelect = (bus: Bus) => {
     update({ selectedBus: bus, selectedSeats: [] });
-    navigate(`/bus/${bus.id}/seats/`);
   };
 
   const tripLabel = {

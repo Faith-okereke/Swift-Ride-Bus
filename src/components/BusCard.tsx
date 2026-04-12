@@ -1,5 +1,5 @@
 import { Wind, Wifi, Clock, Users, ChevronRight } from "lucide-react";
-import type { Bus } from "../types/Seats";
+import type { Bus } from "../types/booking";
 import { useNavigate } from "react-router";
 import { Icon } from "@iconify/react";
 import { useBookingStore } from "../store/bookingStore";
@@ -24,9 +24,12 @@ export default function BusCard({ bus, selected, onSelect }: props) {
   return (
     <div
       onClick={() => {
-        booking?.tripType === "hire"
-          ? navigate("/personal-details")
-          : onSelect();
+        onSelect();
+        if (booking?.tripType === "hire") {
+          navigate("/personal-details");
+        } else {
+          navigate(`/bus/${bus.id}/seats`);
+        }
       }}
       className={`bg-white rounded-[14px] p-5 mb-3 cursor-pointer transition-all duration-200 
        shadow-lg hover:scale-95
@@ -98,7 +101,7 @@ export default function BusCard({ bus, selected, onSelect }: props) {
               {booking?.tripType === "hire"
                 ? bus.hirePrice.toLocaleString()
                 : booking?.tripType === "round"
-                  ? (bus.price * 2).toLocaleString() 
+                  ? (bus.price * 2).toLocaleString()
                   : bus.price.toLocaleString()}
             </div>
           </div>

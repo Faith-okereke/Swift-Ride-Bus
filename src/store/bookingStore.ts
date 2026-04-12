@@ -13,7 +13,7 @@ export interface BookingProps {
     passengers: number;
     selectedBus: any;
     selectedSeats: number[];
-    hireDuration?: string
+    hireDuration?: number;
     passenger: {
         firstName: string;
         lastName: string;
@@ -33,7 +33,7 @@ const initialState: BookingProps = {
     passengers: 1,
     selectedBus: null,
     selectedSeats: [],
-    hireDuration: "1 day",
+    hireDuration: 1,
     passenger: {
         firstName: "",
         lastName: "",

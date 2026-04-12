@@ -1,8 +1,8 @@
 /* ================= Booking SUMMARY ================= */
 
 import { useNavigate } from "react-router";
-import type { Bus } from "../types/Seats";
-import { formatDateShort } from "../utils/helpers";
+import type { Bus } from "../types/booking";
+import { calculateTotalPrice, formatDateShort } from "../utils/helpers";
 import { Icon } from "@iconify/react";
 import toast from "react-hot-toast";
 import { useBookingStore } from "../store/bookingStore";
@@ -13,12 +13,6 @@ function BookingSummary() {
   const seatCount = booking.selectedSeats.length;
   const public_key = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
   const bus = booking.selectedBus as Bus | null;
-  const total =
-    booking?.tripType === "round"
-      ? ((bus?.price ?? 0) * seatCount * 2).toLocaleString()
-      : ((bus?.price ?? 0) * seatCount).toLocaleString();
-  const intDuration = Number(booking?.hireDuration?.slice(-5, 2));
-  const hirePriceTotal = bus?.hirePrice && bus?.hirePrice * intDuration;
 
   const initializePayment = () => {
     try {
@@ -29,7 +23,7 @@ function BookingSummary() {
         email: booking?.passenger?.email,
         amount:
           booking?.tripType === "hire"
-            ? (bus?.hirePrice ?? 0) * 100
+            ? (bus?.hirePrice  ?? 0) * (booking?.hireDuration ?? 1) * 100
             : booking?.tripType === "round"
               ? (bus?.price ?? 0) * 2 * seatCount * 100
               : (bus?.price ?? 0) * seatCount * 100,
@@ -135,7 +129,10 @@ function BookingSummary() {
 
             <div className="flex justify-between items-center w-full px-5 md:px-12 pt-3">
               <p className="text-[#7A7A7A]">Hire Duration</p>
-              <p className="font-medium">{booking?.hireDuration}</p>
+              <p className="font-medium">
+                {booking?.hireDuration}{" "}
+                {booking?.hireDuration === 1 ? "day" : "days"}{" "}
+              </p>
             </div>
           </div>
         )}
@@ -176,10 +173,14 @@ function BookingSummary() {
       <div className="flex justify-between pt-4 border-t border-t-gray-400 lg:px-12 px-5 my-4">
         <span className="font-semibold">Total</span>
         <span className="text-[24px] font-bold text-[#C84B11]">
-          ₦{" "}
-          {booking?.tripType === "hire"
-            ? hirePriceTotal?.toLocaleString()
-            : total?.toLocaleString()}
+          ₦
+          {calculateTotalPrice(
+            bus?.price,
+            bus?.hirePrice,
+            booking?.tripType,
+            booking?.passengers,
+            booking?.hireDuration,
+          )}
         </span>
       </div>
       <div className="px-5 md:px-12 pb-10">

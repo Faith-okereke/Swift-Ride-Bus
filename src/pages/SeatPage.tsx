@@ -1,8 +1,9 @@
 import ProgressBar from "../components/ProgressBar";
 import { useBookingStore } from "../store/bookingStore";
-import type { Bus, SeatProps, SeatStatus } from "../types/Seats";
+import type { Bus, SeatProps, SeatStatus } from "../types/booking";
 import { Icon } from "@iconify/react";
 import { Link, useNavigate } from "react-router";
+import { calculateTotalPrice } from "../utils/helpers";
 
 const Seat = ({ number, status, driverSeat, onClick }: SeatProps) => {
   const base =
@@ -104,7 +105,7 @@ export default function SeatPage() {
           </h3>
         </div>
 
-        <div className="">
+        <div className="lg:flex block justify-center items-start  lg:gap-12">
           {/* Seat Map */}
 
           <div className="bg-white rounded-[14px] shadow-md p-6">
@@ -179,7 +180,7 @@ export default function SeatPage() {
                   );
                 })}
               </div>
-              <div className="flex flex-col  gap-2">
+              <div className="flex flex-col items-start  gap-2">
                 <div className="flex lg:flex-col flex-row gap-2 pt-10 lg:pt-6">
                   {legend.map((item, i) => (
                     <p
@@ -194,23 +195,19 @@ export default function SeatPage() {
                   ))}
                 </div>
                 <div className="text-justify pt-4">
-                  <p className="font-bold text-lg">
+                  <p className="font-medium text-lg">
                     Total Price: ₦
-                    {booking?.tripType === "hire"
-                      ? bus.hirePrice.toLocaleString()
-                      : booking?.tripType === "round"
-                        ? (
-                            bus.price *
-                            booking?.selectedSeats.length *
-                            2
-                          ).toLocaleString()
-                        : (
-                            bus.price * booking?.selectedSeats.length
-                          ).toLocaleString()}
+                    {calculateTotalPrice(
+                      bus?.price,
+                      bus?.hirePrice,
+                      booking?.tripType,
+                      booking?.passengers,
+                      booking?.hireDuration, 
+                    )}
                   </p>
                   {booking?.selectedSeats.length > 0 && (
-                    <p className="font-bold">
-                      Seat {booking?.selectedSeats.join(",") || 0} selected
+                    <p className="">
+                      Seat <span className="font-bold">{booking?.selectedSeats.join(",") || 0}</span> selected
                     </p>
                   )}
                 </div>
@@ -225,6 +222,7 @@ export default function SeatPage() {
               </button>
             </div>
           </div>
+          <img className="w-64 rounded-lg hidden lg:block" src={bus?.image} />
         </div>
       </div>
     </div>
