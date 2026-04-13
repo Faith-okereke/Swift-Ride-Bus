@@ -2,7 +2,7 @@ import ProgressBar from "../components/ProgressBar";
 import { useBookingStore } from "../store/bookingStore";
 import type { Bus, SeatProps, SeatStatus } from "../types/booking";
 import { Icon } from "@iconify/react";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { calculateTotalPrice } from "../utils/helpers";
 
 const Seat = ({ number, status, driverSeat, onClick }: SeatProps) => {
@@ -202,12 +202,16 @@ export default function SeatPage() {
                       bus?.hirePrice,
                       booking?.tripType,
                       booking?.passengers,
-                      booking?.hireDuration, 
+                      booking?.hireDuration,
                     )}
                   </p>
                   {booking?.selectedSeats.length > 0 && (
                     <p className="">
-                      Seat <span className="font-bold">{booking?.selectedSeats.join(",") || 0}</span> selected
+                      Seat{" "}
+                      <span className="font-bold">
+                        {booking?.selectedSeats.join(",") || 0}
+                      </span>{" "}
+                      selected
                     </p>
                   )}
                 </div>
@@ -215,10 +219,11 @@ export default function SeatPage() {
             </div>
             <div className="flex justify-end items-end align-bottom">
               <button
+                onClick={() => navigate("/personal-details")}
                 className="btn-primary w-auto disabled:cursor-not-allowed disabled:hover:bg-[#c84b11] mt-4 "
                 disabled={booking?.selectedSeats.length < booking.passengers}
               >
-                <Link to={"/personal-details"}>Continue</Link>
+                Continue
               </button>
             </div>
           </div>
