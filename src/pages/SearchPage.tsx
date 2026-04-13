@@ -56,7 +56,12 @@ export default function SearchPage() {
     ) {
       newErrors.returnDate = "Return Date cannot be the same as Departure Date";
     }
-
+    if (
+      booking.tripType === "round" &&
+      booking.departDate > booking.returnDate
+    ) {
+      newErrors.returnDate = "Return Date cannot be before the Departure Date";
+    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -316,8 +321,6 @@ export default function SearchPage() {
           </button>
         </div>
       </form>
-
-     
     </div>
   );
 }
