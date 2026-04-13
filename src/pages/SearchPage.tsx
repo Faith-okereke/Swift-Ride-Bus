@@ -18,24 +18,6 @@ const TRIP_TYPES: { id: TripType; label: string }[] = [
   { id: "hire", label: "Hire a Bus" },
 ];
 
-const FEATURES = [
-  {
-    icon: "ic:twotone-shield",
-    title: "Safe Journeys",
-    desc: "Verified drivers, insured vehicles, real-time tracking",
-  },
-  {
-    icon: "solar:armchair-outline",
-    title: "Choose Your Seat",
-    desc: "Pick exactly where you sit before you board",
-  },
-  {
-    icon: "octicon:zap-24",
-    title: "Instant Tickets",
-    desc: "Book in under 3 minutes, get your e-ticket instantly",
-  },
-];
-
 export default function SearchPage() {
   const { booking, update } = useBookingStore();
   const [loading, setLoading] = useState(false);
@@ -67,6 +49,12 @@ export default function SearchPage() {
 
     if (booking.tripType === "round" && !booking.returnDate) {
       newErrors.returnDate = "Select return date";
+    }
+    if (
+      booking.tripType === "round" &&
+      booking.departDate === booking.returnDate
+    ) {
+      newErrors.returnDate = "Return Date cannot be the same as Departure Date";
     }
 
     setErrors(newErrors);
@@ -329,21 +317,7 @@ export default function SearchPage() {
         </div>
       </form>
 
-      {/* Features */}
-      <div className="max-w-3xl mx-auto px-4 mb-16 grid grid-cols-1 md:grid-cols-3 gap-4 pb-12">
-        {FEATURES.map(({ icon, title, desc }) => (
-          <div
-            key={title}
-            className="bg-white border border-[#E0DED7] rounded-[14px] p-5 text-center"
-          >
-            <div className="w-10 h-10 rounded-[10px] bg-[#F2F1ED] flex items-center justify-center mx-auto mb-3">
-              <Icon icon={icon} fontSize={18} className="text-[#C84B11]" />
-            </div>
-            <div className="text-[14px] font-semibold mb-1">{title}</div>
-            <div className="text-[12px] text-[#7A7A7A]">{desc}</div>
-          </div>
-        ))}
-      </div>
+     
     </div>
   );
 }

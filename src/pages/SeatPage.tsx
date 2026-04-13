@@ -194,7 +194,7 @@ export default function SeatPage() {
                     </p>
                   ))}
                 </div>
-                <div className="text-justify pt-4">
+                <div className="text-left pt-4">
                   <p className="font-medium text-lg">
                     Total Price: ₦
                     {calculateTotalPrice(
